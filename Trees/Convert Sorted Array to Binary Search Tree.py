@@ -15,3 +15,29 @@ One possible answer is: [0,-3,9,-10,null,5], which represents the following heig
    /   /
  -10  5
  """
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+
+class Solution:
+    def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
+        if not nums:
+            return
+
+        if len(nums) == 1:
+            x = TreeNode(nums[0])
+            return x
+
+        low = 0
+        high = len(nums) - 1
+        mid = high // 2
+        root = TreeNode(nums[mid])
+
+        root.left = self.sortedArrayToBST(nums[:mid])
+        root.right = self.sortedArrayToBST(nums[mid+1:])
+
+        return root
